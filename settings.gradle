@@ -1,0 +1,1 @@
+include ':NumberetcGenerator', ':app', ':base', ':instantapp'
