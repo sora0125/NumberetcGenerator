@@ -8,6 +8,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 
 import kotlinx.android.synthetic.main.activity_main.*
+import org.apache.commons.lang.RandomStringUtils
 import java.security.SecureRandom
 import java.util.*
 
@@ -23,27 +24,34 @@ class MainActivity : AppCompatActivity() {
 
             val radioGroup: RadioGroup = findViewById(R.id.radioGroup_1)
             val id = radioGroup.checkedRadioButtonId
-            lateinit var generateResult: ResultData
-            lateinit var dispString: String
+            lateinit var generateResult: String
 
             // ラジオボタンごとの処理
             when (id) {
+                // ３桁
                 R.id.radioButton_digit3 -> {
                     generateResult = generateNumbers3()
-                    dispString =  generateResult.digit100 + generateResult.digit10 + generateResult.digit1
                 }
+                // ４桁
                 R.id.radioButton_digit4 -> {
                     generateResult = generateNumbers4()
-                    dispString =  generateResult.digit1000 + generateResult.digit100 + generateResult.digit10 + generateResult.digit1
                 }
+                // 8桁の文字列（数字＋アルファベット）
+                R.id.radioButton_passAN8 -> {
+                    generateResult = generateRandomStringAN8()
+                }
+                // 8桁の任意の文字列
+                R.id.radioButton_pass_select8 -> {
+                    generateResult = generateRandomSelectString8()
+                }
+                // 未選択時（デフォルトで３桁）
                 else -> {
                     generateResult = generateNumbers3()
-                    dispString =  generateResult.digit100 + generateResult.digit10 + generateResult.digit1
                 }
             }
 
             val displayNumbers: TextView = findViewById(R.id.generateResult)
-            displayNumbers.text = dispString
+            displayNumbers.text = generateResult
         }
     }
 
@@ -67,12 +75,12 @@ class MainActivity : AppCompatActivity() {
      * Method Name : generateNumbers3
      * summary    : ３桁の数字を生成する
      */
-    private fun generateNumbers3() :ResultData {
+    private fun generateNumbers3() :String {
         val r = Random()
         val digit1 = Integer.toString(r.nextInt(10))
         val digit10 = Integer.toString(r.nextInt(10))
         val digit100 = Integer.toString(r.nextInt(10))
-        val rs = ResultData(digit1, digit10, digit100)
+        val rs =  digit100 + digit10 + digit1
 
         return  rs
     }
@@ -81,15 +89,35 @@ class MainActivity : AppCompatActivity() {
      * Method Name : generateNumbers4
      * summary    : ４桁の数字を生成する
      */
-    private fun generateNumbers4() :ResultData {
+    private fun generateNumbers4() :String {
         val r = Random()
         val digit1 = Integer.toString(r.nextInt(10))
         val digit10 = Integer.toString(r.nextInt(10))
         val digit100 = Integer.toString(r.nextInt(10))
         val digit1000 = Integer.toString(r.nextInt(10))
-        val rs = ResultData(digit1, digit10, digit100, digit1000)
+        val rs =  digit1000 + digit100 + digit10 + digit1
 
         return  rs
     }
-    
+
+    /**
+     * Method Name : generateRandomStringAN8
+     * summary    : 8桁のアルファベット・数字を含む文字列を生成する
+     */
+    private fun generateRandomStringAN8() :String {
+        val rs = RandomStringUtils.randomAlphanumeric(8)
+
+        return  rs
+    }
+
+    /**
+     * Method Name : generateRandomSelectString8
+     * summary    : 指定した文字の8桁の文字列を生成する
+     */
+    private fun generateRandomSelectString8() :String {
+        val rs = RandomStringUtils.random(8,"tadakun")
+
+        return  rs
+    }
+
 }
