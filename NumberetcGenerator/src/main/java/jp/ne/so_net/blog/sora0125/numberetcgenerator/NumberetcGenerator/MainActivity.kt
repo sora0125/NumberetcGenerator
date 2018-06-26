@@ -9,7 +9,7 @@ import android.widget.TextView
 
 import kotlinx.android.synthetic.main.activity_main.*
 import org.apache.commons.lang.RandomStringUtils
-import java.security.SecureRandom
+import java.lang.StringBuilder
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
                 // 8桁の任意の文字列
                 R.id.radioButton_pass_select8 -> {
                     generateResult = generateRandomSelectString8()
+                }
+                // 任意の文字列
+                R.id.radioButton_pass_any_select -> {
+                    generateResult = generateSelectString("Natsu", "Atsui", "Yo", "Ne")
                 }
                 // 未選択時（デフォルトで３桁）
                 else -> {
@@ -115,9 +119,83 @@ class MainActivity : AppCompatActivity() {
      * summary    : 指定した文字の8桁の文字列を生成する
      */
     private fun generateRandomSelectString8() :String {
-        val rs = RandomStringUtils.random(8,"tadakun")
+        val rs = RandomStringUtils.random(8,"AndroidiOS")
 
         return  rs
+    }
+
+    /**
+     * Method Name : generateRandomSelectString
+     * summary    : 指定した文字で文字列を生成する
+     */
+    private fun generateRandomSelectString(seed: String) :String {
+        val rs = RandomStringUtils.random(1,seed)
+        return  rs
+    }
+
+    /**
+     * Method Name : generateSelectString
+     * summary    : 入力されたキーワードから文字列を生成する
+     */
+    private fun generateSelectString(field1: String, field2: String, field3: String, field4: String) :String {
+        val inputList: MutableList<String> = mutableListOf()
+        inputList.add(field1)
+        inputList.add(field2)
+        inputList.add(field3)
+        inputList.add(field4)
+
+        val orderList: MutableList<String> = mutableListOf()
+        val orderListTmp: MutableList<String> = mutableListOf()
+        val tmpStrBuilder = StringBuilder()
+        orderList.add("0")
+        orderList.add("1")
+        orderList.add("2")
+        orderList.add("3")
+        orderListTmp.addAll(orderList)
+        var seed = orderList[0] + orderList[1] + orderList[2] + orderList[3]
+        var resultstr = generateRandomSelectString(seed)
+        var i = 0
+        while (i < 4) {
+            val rsTmp = StringBuilder()
+            for (order in orderListTmp) {
+                if (order == resultstr) {
+                    tmpStrBuilder.append(inputList[resultstr.toInt()])
+                    orderList.remove(resultstr)
+                    i++
+                }else {
+                    rsTmp.append(order)
+                }
+            }
+            orderListTmp.remove(resultstr)
+            if (!rsTmp.isEmpty()) {
+                seed = rsTmp.toString()
+                resultstr = generateRandomSelectString(seed)
+            }
+        }
+
+        val rs = tmpStrBuilder.toString()
+        return  rs
+    }
+
+    /**
+     * Method Name : isDuplicate
+     * summary    : 数字の重複がないかチェックする
+     */
+    private fun isDuplicate(orderList: MutableList<Int>) : Boolean {
+        var judge = true
+        var checkNum = 0
+        for (i in 0 until orderList.size - 1) {
+            checkNum = orderList[i]
+            for (j in 1 until orderList.size) {
+                val tmp = orderList[j]
+                if (checkNum == tmp) {
+                    judge = false
+                    break
+                }
+            }
+        }
+
+        return judge
     }
 
 }
