@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
 
             val radioGroup: RadioGroup = findViewById(R.id.radioGroup_1)
+            val editText1 = findViewById<EditText>(R.id.text_field1)
+            val editText2 = findViewById<EditText>(R.id.text_field2)
+            val editText3 = findViewById<EditText>(R.id.text_field3)
+            val editText4 = findViewById<EditText>(R.id.text_field4)
             val id = radioGroup.checkedRadioButtonId
             lateinit var generateResult: String
 
@@ -46,7 +51,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 // 任意の文字列
                 R.id.radioButton_pass_any_select -> {
-                    generateResult = generateSelectString("Natsu", "Atsui", "Yo", "Ne")
+                    val text1 = editText1.text.toString()
+                    val text2 = editText2.text.toString()
+                    val text3 = editText3.text.toString()
+                    val text4 = editText4.text.toString()
+                    generateResult = generateSelectString(text1, text2, text3, text4)
                 }
                 // 未選択時（デフォルトで３桁）
                 else -> {
