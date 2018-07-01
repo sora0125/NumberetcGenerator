@@ -2,17 +2,15 @@ package jp.ne.so_net.blog.sora0125.numberetcgenerator.NumberetcGenerator
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 
 import kotlinx.android.synthetic.main.activity_main.*
+import org.apache.commons.lang.ObjectUtils
 
 class MainActivity : AppCompatActivity() {
-
     /**
      * Method Name : onCreate
      * summary    : メイン画面の初期化を行う
@@ -21,6 +19,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //setSupportActionBar(toolbar)
+
+        // リストビューとアダプターの初期化
+        val historyView = findViewById<ListView>(R.id.history_view)
+        val historyList = mutableListOf<String>()
+        val historyAdapter = ArrayAdapter<String>(this, R.layout.row_content, historyList)
+        val historyRow = findViewById<TextView>(R.id.row_text)
+        historyView.adapter = historyAdapter
 
         update_btn.setOnClickListener { _ ->
             val radioGroup: RadioGroup = findViewById(R.id.radioGroup_1)
@@ -46,15 +51,27 @@ class MainActivity : AppCompatActivity() {
                 R.id.radioButton_digit4 -> {
                     generateResult = generator.generateNumbers4()
                 }
-                // 8桁の文字列（数字＋アルファベット）
-                R.id.radioButton_passAN8 -> {
-                    generateResult = generator.generateRandomStringAN8()
+                // 数字＋アルファベット
+                R.id.radioButton_passAN -> {
+                    val inputDigit1 = findViewById<EditText>(R.id.text_any_digit1)
+                    val digit = inputDigit1.text.toString()
+                    if (digit.isEmpty()){
+                        Toast.makeText(this, "数字を入力してください", Toast.LENGTH_LONG).show()
+                        return@setOnClickListener
+                    }
+                    generateResult = generator.generateRandomStringAN(inputDigit1.text.toString().toInt())
                 }
-                // 8桁の任意の文字列
-                R.id.radioButton_pass_select8 -> {
-                    generateResult = generator.generateRandomSelectString8()
+                // 数字＋アルファベット＋記号
+                R.id.radioButton_pass_select -> {
+                    val inputDigit2 = findViewById<EditText>(R.id.text_any_digit2)
+                    val digit = inputDigit2.text.toString()
+                    if (digit.isEmpty()){
+                        Toast.makeText(this, "数字を入力してください", Toast.LENGTH_LONG).show()
+                        return@setOnClickListener
+                    }
+                    generateResult = generator.generateRandomStringASCII(inputDigit2.text.toString().toInt())
                 }
-                // 任意の文字列
+                // 自分で入力した文字
                 R.id.radioButton_pass_any_select -> {
                     val text1 = editText1.text.toString()
                     val text2 = editText2.text.toString()
@@ -65,11 +82,6 @@ class MainActivity : AppCompatActivity() {
                     // 文字の長さをチェック
                     if (!validation.isInputStrLengthChecked(checkStr)) {
                         Toast.makeText(this, "32文字以内にしてください", Toast.LENGTH_LONG).show()
-                        return@setOnClickListener
-                    }
-                    // 文字の種類をチェック
-                    if (!validation.isInputStrChecked(checkStr)) {
-                        Toast.makeText(this, "改行以外を入力してください", Toast.LENGTH_LONG).show()
                         return@setOnClickListener
                     }
                     generateResult = generator.generateSelectString(text1, text2, text3, text4)
@@ -83,8 +95,16 @@ class MainActivity : AppCompatActivity() {
             //　生成した結果を表示
             val displayNumbers: TextView = findViewById(R.id.generateResult)
             displayNumbers.text = generateResult
+
+            // リストに生成結果を追加
+            historyList.add(0, generateResult)
+            // リストビューの表示を更新する
+            historyAdapter.notifyDataSetChanged()
+
         }
+
     }
+
 
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {
 //        // Inflate the menu; this adds items to the action bar if it is present.

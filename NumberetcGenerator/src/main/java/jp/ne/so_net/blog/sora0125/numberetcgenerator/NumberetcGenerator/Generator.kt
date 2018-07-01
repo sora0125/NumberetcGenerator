@@ -35,21 +35,21 @@ class Generator {
     }
 
     /**
-     * Method Name : generateRandomStringAN8
-     * summary    : 8桁のアルファベット・数字を含む文字列を生成する
+     * Method Name : generateRandomStringAN
+     * summary    : 入力された桁数のアルファベット・数字を含む文字列を生成する
      */
-    fun generateRandomStringAN8() :String {
-        val rs = RandomStringUtils.randomAlphanumeric(8)
+    fun generateRandomStringAN(digit: Int) :String {
+        val rs = RandomStringUtils.randomAlphanumeric(digit)
 
         return  rs
     }
 
     /**
-     * Method Name : generateRandomSelectString8
-     * summary    : 指定した文字の8桁の文字列を生成する
+     * Method Name : generateRandomStringASCII
+     * summary    : 入力された桁数のアルファベット・数字・記号を含む文字列を生成する
      */
-    fun generateRandomSelectString8() :String {
-        val rs = RandomStringUtils.random(8,"AndroidiOS")
+    fun generateRandomStringASCII(digit: Int) :String {
+        val rs = RandomStringUtils.randomAscii(digit)
 
         return  rs
     }

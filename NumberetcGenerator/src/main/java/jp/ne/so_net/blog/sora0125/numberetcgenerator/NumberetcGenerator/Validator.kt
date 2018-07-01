@@ -9,7 +9,7 @@ class Validator {
     fun isInputStrLengthChecked(inputStr: String): Boolean{
         var result = false
         val MAX_LENGTH = 32
-        if (inputStr.length < MAX_LENGTH) {
+        if (inputStr.length <= MAX_LENGTH) {
             result = true
 
         }
@@ -23,9 +23,8 @@ class Validator {
      */
     fun isInputStrChecked(inputStr: String): Boolean {
         var result = true
-        // 改行が入っていたらエラー
 //        val regex = Regex("""^[a-zA-Z0-9=^~|@`{}:*;+_/?.,<>!"#$%&'()¥n].+$""")
-        val regex = Regex("¥¥n")
+        val regex = Regex("\n")
         if (regex.containsMatchIn(inputStr)) {
             result = false
         }
