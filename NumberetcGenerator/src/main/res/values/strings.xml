@@ -5,11 +5,11 @@
     <string name="info_message">右下の更新ボタンで生成します</string>
     <string name="label_digit3">３桁の数字</string>
     <string name="label_digit4">４桁の数字</string>
-    <string name="label_strings8">数字＋アルファベット</string>
+    <string name="label_stringsAN">数字・アルファベット</string>
     <string name="label_any_strings">自分で入力</string>
     <string name="label_field1">Field1</string>
     <string name="label_field2">Field2</string>
     <string name="label_field3">Field3</string>
     <string name="label_field4">Field4</string>
-    <string name="label_any_strings8">数字＋アルファベット＋記号</string>
+    <string name="label_any_stringsANS">数字・アルファベット・記号</string>
 </resources>
