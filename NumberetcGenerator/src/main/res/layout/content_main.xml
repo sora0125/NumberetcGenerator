@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.085">
 
-        <!--<requestFocus />-->
+        <requestFocus />
     </TextView>
 
     <TextView
@@ -44,11 +45,13 @@
         android:layout_width="38dp"
         android:layout_height="36dp"
         android:layout_weight="1"
-        android:hint="桁数を入力"
+        android:focusable="auto"
+        android:hint="@string/digit_hint1"
+        android:imeOptions="actionDone"
         android:inputType="number"
         android:maxLength="2"
         android:maxLines="1"
-        android:text="8"
+        android:text="@string/default_digit1"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,11 +66,12 @@
         android:layout_width="38dp"
         android:layout_height="36dp"
         android:layout_weight="1"
-        android:hint="桁数を入力"
+        android:hint="@string/digit_hint1"
+        android:imeOptions="actionDone"
         android:inputType="number"
         android:maxLength="2"
         android:maxLines="1"
-        android:text="8"
+        android:text="@string/default_digit1"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -89,9 +93,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447">
+        app:layout_constraintVertical_bias="0.417">
 
-        <!--<requestFocus-->
+        <!--<requestFocus/>-->
         <!--android:layout_weight="1"-->
         <!--tools:layout_editor_absoluteY="29dp" />-->
 
@@ -228,6 +232,7 @@
         android:layout_height="39dp"
         android:layout_weight="1"
         android:hint="@string/label_field4"
+        android:imeOptions="actionDone"
         android:inputType="text"
         android:maxLines="1"
         android:textColor="#000000"
@@ -242,14 +247,42 @@
 
     <ListView
         android:id="@+id/history_view"
-        android:layout_width="368dp"
-        android:layout_height="141dp"
+        android:layout_width="385dp"
+        android:layout_height="156dp"
         android:layout_weight="1"
         android:background="#f6f1f1"
+        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintVertical_bias="0.802"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/update_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        ads:layout_constraintHorizontal_bias="1.0"
+        ads:layout_constraintVertical_bias="0.846"
+        app:backgroundTint="@android:color/holo_blue_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831" />
+        app:srcCompat="@android:drawable/stat_notify_sync" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="320dp"
+        android:layout_height="53dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.994" />
 
 </android.support.constraint.ConstraintLayout>

@@ -18,7 +18,7 @@ class Validator {
     }
 
     /**
-     * Method Name : isInputStrLengthChecked
+     * Method Name : isInputStrChecked
      * summary    : 入力された文字列の種類をチェックする
      */
     fun isInputStrChecked(inputStr: String): Boolean {

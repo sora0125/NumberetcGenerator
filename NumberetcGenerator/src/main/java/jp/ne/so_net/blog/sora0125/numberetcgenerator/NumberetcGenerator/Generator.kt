@@ -4,6 +4,9 @@ import org.apache.commons.lang.RandomStringUtils
 import java.lang.StringBuilder
 import java.util.*
 
+// 生成する乱数の範囲
+const val SEED_NUMBER = 10
+
 class Generator {
     /**
      * Method Name : generateNumbers3
@@ -11,9 +14,9 @@ class Generator {
      */
     fun generateNumbers3() :String {
         val r = Random()
-        val digit1 = Integer.toString(r.nextInt(10))
-        val digit10 = Integer.toString(r.nextInt(10))
-        val digit100 = Integer.toString(r.nextInt(10))
+        val digit1 = Integer.toString(r.nextInt(SEED_NUMBER))
+        val digit10 = Integer.toString(r.nextInt(SEED_NUMBER))
+        val digit100 = Integer.toString(r.nextInt(SEED_NUMBER))
         val rs =  digit100 + digit10 + digit1
 
         return  rs
@@ -25,10 +28,10 @@ class Generator {
      */
     fun generateNumbers4() :String {
         val r = Random()
-        val digit1 = Integer.toString(r.nextInt(10))
-        val digit10 = Integer.toString(r.nextInt(10))
-        val digit100 = Integer.toString(r.nextInt(10))
-        val digit1000 = Integer.toString(r.nextInt(10))
+        val digit1 = Integer.toString(r.nextInt(SEED_NUMBER))
+        val digit10 = Integer.toString(r.nextInt(SEED_NUMBER))
+        val digit100 = Integer.toString(r.nextInt(SEED_NUMBER))
+        val digit1000 = Integer.toString(r.nextInt(SEED_NUMBER))
         val rs =  digit1000 + digit100 + digit10 + digit1
 
         return  rs

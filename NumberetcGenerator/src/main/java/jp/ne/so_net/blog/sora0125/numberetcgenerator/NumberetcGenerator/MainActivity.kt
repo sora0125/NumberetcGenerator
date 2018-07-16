@@ -2,13 +2,12 @@ package jp.ne.so_net.blog.sora0125.numberetcgenerator.NumberetcGenerator
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.*
-
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
-import org.apache.commons.lang.ObjectUtils
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
     /**
@@ -103,7 +102,29 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        // 「文字の組み合わせ」ラジオボタンタップ時の動作
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup_1)
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            if (group == radioGroup) {
+                when (checkedId) {
+                    R.id.radioButton_pass_any_select -> {
+                        val editText1 = findViewById<EditText>(R.id.text_field1)
+                        editText1.requestFocus()
+                    }
+                }
+            }
+        }
+        // AdMobを設定
+        val mAdView = findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
     }
+
+
+
+
+
 
 
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {

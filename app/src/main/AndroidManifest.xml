@@ -1,2 +1,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="jp.ne.so_net.blog.sora0125.numberetcgenerator.app" />
+    package="jp.ne.so_net.blog.sora0125.numberetcgenerator.app">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application>
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+    <activity
+        android:name="jp.ne.so_net.blog.sora0125.numberetcgenerator.NumberetcGenerator.MainActivity"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:windowSoftInputMode="adjustPan|adjustResize">
+        <intent-filter android:order="1">
+            <!--<action android:name="android.intent.action.VIEW" />-->
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+
+            <!--<category android:name="android.intent.category.BROWSABLE" />-->
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+
+            <!--<data-->
+                <!--android:host="sora0125.blog.so_net.ne.jp"-->
+                <!--android:pathPattern="/.*"-->
+                <!--android:scheme="https" />-->
+        </intent-filter>
+    </activity>
+    <!--<activity-->
+    <!--android:name="com.google.android.gms.ads.AdActivity"-->
+    <!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"-->
+    <!--android:theme="@android:style/Theme.Translucent" />-->
+    </application>
+</manifest>
